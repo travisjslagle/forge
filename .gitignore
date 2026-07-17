@@ -1,0 +1,18 @@
+# Local environment and secrets
+.env
+compose/.env
+*.local
+*.secret
+
+# Generated archives/logs
+*.tar
+*.tar.gz
+*.zip
+*.log
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+

@@ -1,0 +1,57 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: forge-homepage
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      TZ: ${TZ}
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS}
+    volumes:
+      - ${FORGE_ROOT}/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: forge-homeassistant
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - ${FORGE_ROOT}/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: forge-mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - ${FORGE_ROOT}/mosquitto/config:/mosquitto/config
+      - ${FORGE_ROOT}/mosquitto/data:/mosquitto/data
+      - ${FORGE_ROOT}/mosquitto/log:/mosquitto/log
+
+  node-red:
+    image: nodered/node-red:latest
+    container_name: forge-node-red
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - ${FORGE_ROOT}/node-red:/data
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: forge-uptime-kuma
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - ${FORGE_ROOT}/uptime-kuma:/app/data
+

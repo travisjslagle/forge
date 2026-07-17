@@ -1,0 +1,35 @@
+- Forge:
+    - Home Assistant:
+        href: http://forge.local:8123
+        description: Smart home hub
+        icon: home-assistant
+        siteMonitor: http://forge.local:8123
+    - Node-RED:
+        href: http://forge.local:1880
+        description: Automation workbench
+        icon: node-red
+        siteMonitor: http://forge.local:1880
+    - Uptime Kuma:
+        href: http://forge.local:3001
+        description: Monitoring
+        icon: uptime-kuma
+        siteMonitor: http://forge.local:3001
+    - MQTT:
+        href: http://forge.local:1883
+        description: Mosquitto broker
+        icon: eclipse-mosquitto
+
+- Network:
+    - Forge SSH:
+        href: ssh://forge.local
+        description: Admin access
+        icon: linux
+    - Router:
+        href: http://192.168.1.1
+        description: Update this after DHCP reservation
+        icon: router
+    - Tailscale:
+        href: https://login.tailscale.com/admin/machines
+        description: Private remote access
+        icon: tailscale
+

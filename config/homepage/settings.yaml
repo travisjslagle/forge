@@ -1,0 +1,14 @@
+title: Forge
+theme: dark
+color: slate
+language: en
+target: _self
+
+layout:
+  Forge:
+    style: row
+    columns: 4
+  Network:
+    style: row
+    columns: 4
+
