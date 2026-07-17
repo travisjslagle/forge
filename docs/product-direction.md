@@ -30,7 +30,7 @@ The product should emphasize:
 
 ## Wedge
 
-Budget Forge is the first wedge because financial data is concrete, sensitive,
+Forge Budget is the first wedge because financial data is concrete, sensitive,
 and recurring. A local budgeting assistant is useful on its own and creates a
 good first test of the broader product idea.
 
@@ -51,13 +51,13 @@ Suggested repo boundaries over time:
 
 ```text
 forge-infra/          host setup, Docker, networking, backups
-budget-forge/         first product app: imports, categorization, reports
+forge-budget/         first product app: imports, categorization, reports
 forge-core/           later: identity, permissions, audit log, shared API
 forge-connectors/     later: Gmail, calendar, phone, bank sync connectors
 forge-mobile/         later: mobile client or reused scheduling/to-do app
 ```
 
-For now, `forge-infra` and `budget-forge` are enough. The other names are
+For now, `forge-infra` and `forge-budget` are enough. The other names are
 directional placeholders, not work to start immediately.
 
 ## Existing Mobile App
@@ -100,7 +100,7 @@ Security cautions:
   is a clear need and local device protection is understood.
 - Keep a visible audit trail for mobile-triggered actions.
 
-The mobile app should not become the first dependency for Budget Forge. It is a
+The mobile app should not become the first dependency for Forge Budget. It is a
 reasonable later client once the server-side data model and reports are useful.
 
 ## Assistant Direction
@@ -143,7 +143,7 @@ memory of the household.
 The first validation question is personal:
 
 ```text
-Do I miss Budget Forge when it is off?
+Do I miss Forge Budget when it is off?
 ```
 
 The second validation question is broader:
