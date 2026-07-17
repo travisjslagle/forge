@@ -21,10 +21,14 @@ optional categorization assistant after the import and review loop is solid.
 - Chase checking
 - Chase credit card
 - Joint PNC household account
+- Discover credit card
 
 Each account source should have its own importer profile because banks use
 different CSV headers, date formats, signs for debits/credits, and description
 fields.
+
+Importer field notes live in
+[budget-csv-importers.md](budget-csv-importers.md).
 
 ## Tech Stack
 
@@ -275,6 +279,7 @@ approve or correct the category before the app trusts it.
 - What exact CSV headers do Chase checking exports use?
 - What exact CSV headers do Chase credit card exports use?
 - What exact CSV headers do PNC exports use?
+- What exact CSV headers do Discover exports use?
 - Should transfers between accounts be hidden from spending reports by default?
 - Should credit card payments be categorized as `Debt Payment`, `Transfer`, or
   excluded from spending totals?

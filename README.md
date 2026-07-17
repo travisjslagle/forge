@@ -57,6 +57,8 @@ commands, see [docs/cli-cheatsheet.md](docs/cli-cheatsheet.md).
   wedge, platform boundaries, and mobile/security direction.
 - [Budget Forge V1](docs/budget-forge-v1.md): local CSV imports, transaction
   categorization, and household spending reports.
+- [Budget CSV Importers](docs/budget-csv-importers.md): observed bank export
+  schemas and normalization notes.
 
 ## Repo Versus Live Data
 
