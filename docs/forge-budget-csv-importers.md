@@ -1,6 +1,6 @@
-# Budget CSV Importers
+# Forge Budget CSV Importers
 
-These notes describe CSV export formats observed during early Budget Forge
+These notes describe CSV export formats observed during early Forge Budget
 planning. They should capture importer behavior without committing raw financial
 CSV files or transaction rows.
 

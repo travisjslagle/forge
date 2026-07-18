@@ -1,6 +1,6 @@
-# Budget Forge V1
+# Forge Budget V1
 
-Budget Forge is a local-first budgeting tool for importing financial CSVs,
+Forge Budget is a local-first budgeting tool for importing financial CSVs,
 normalizing transactions, categorizing spend, and reviewing household trends.
 
 It should be useful before any AI is involved. Local LLM help can be added as an
@@ -28,7 +28,7 @@ different CSV headers, date formats, signs for debits/credits, and description
 fields.
 
 Importer field notes live in
-[budget-csv-importers.md](budget-csv-importers.md).
+[forge-budget-csv-importers.md](forge-budget-csv-importers.md).
 
 ## Tech Stack
 
@@ -39,10 +39,10 @@ Importer field notes live in
 - Docker Compose for deployment on Forge
 - Optional local LLM endpoint on the gaming PC for category suggestions
 
-The app should live in a separate repo, likely `budget-forge`, while
+The app should live in a separate repo, `forge-budget`, while
 `forge-infra` remains the repo for host setup and shared services.
 
-Budget Forge is the first useful wedge of the broader Forge product direction.
+Forge Budget is the first useful wedge of the broader Forge product direction.
 It should be built as a clean app with callable import, categorization, report,
 backup, and audit services so a future assistant or mobile client can use the
 same behavior without scraping the UI.
@@ -63,7 +63,7 @@ into this repo, or sent to an external API.
 
 ## Expected Data Size
 
-Budget Forge is expected to be small. The transaction database and CSV exports
+Forge Budget is expected to be small. The transaction database and CSV exports
 are not storage-heavy unless the project later starts saving receipt photos,
 statement PDFs, or long AI audit logs.
 
@@ -76,7 +76,7 @@ Rough estimates for three accounts:
 | App logs with rotation | 10-200 MB | Depends on retention |
 | Encrypted backups | 500 MB-5 GB | 3-25 GB |
 
-Reserve 25-50 GB for Budget Forge and its backups on Forge. That should be
+Reserve 25-50 GB for Forge Budget and its backups on Forge. That should be
 comfortable for many years unless the scope expands to documents or images.
 
 ## Encryption And Access
@@ -86,8 +86,8 @@ local-only.
 
 V1 security decisions:
 
-- Keep Budget Forge reachable only on the LAN and Tailscale.
-- Do not expose Budget Forge to the public internet.
+- Keep Forge Budget reachable only on the LAN and Tailscale.
+- Do not expose Forge Budget to the public internet.
 - Store app data outside git under `/srv/forge-data/budget`.
 - Restrict data directory permissions to the Forge service user.
 - Never commit raw CSVs, SQLite databases, exported statements, or backups.
@@ -104,7 +104,7 @@ control.
 
 ## Backup Policy
 
-Budget Forge should make backups boring and visible from the beginning.
+Forge Budget should make backups boring and visible from the beginning.
 
 V1 backup decisions:
 
@@ -228,9 +228,9 @@ merchant memory entry.
 
 LLM categorization should be optional and local. The first likely setup is:
 
-- Forge runs Budget Forge.
+- Forge runs Forge Budget.
 - The gaming PC runs Ollama, LM Studio, or a similar local inference server.
-- Budget Forge sends small categorization prompts over the LAN or Tailscale.
+- Forge Budget sends small categorization prompts over the LAN or Tailscale.
 
 Only send the minimum necessary fields:
 

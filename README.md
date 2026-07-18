@@ -55,9 +55,9 @@ commands, see [docs/cli-cheatsheet.md](docs/cli-cheatsheet.md).
 
 - [Product Direction](docs/product-direction.md): longer-term Forge thesis,
   wedge, platform boundaries, and mobile/security direction.
-- [Budget Forge V1](docs/budget-forge-v1.md): local CSV imports, transaction
+- [Forge Budget V1](docs/forge-budget-v1.md): local CSV imports, transaction
   categorization, and household spending reports.
-- [Budget CSV Importers](docs/budget-csv-importers.md): observed bank export
+- [Forge Budget CSV Importers](docs/forge-budget-csv-importers.md): observed bank export
   schemas and normalization notes.
 
 ## Repo Versus Live Data
