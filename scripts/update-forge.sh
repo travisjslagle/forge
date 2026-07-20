@@ -10,11 +10,10 @@ if [[ ! -f "$COMPOSE_DIR/.env" ]]; then
 fi
 
 echo "==> Pulling container images"
-docker compose --env-file "$COMPOSE_DIR/.env" -f "$COMPOSE_DIR/docker-compose.yml" pull
+docker compose --env-file "$COMPOSE_DIR/.env" -f "$COMPOSE_DIR/docker-compose.yml" pull --ignore-buildable
 
 echo "==> Starting Forge services"
-docker compose --env-file "$COMPOSE_DIR/.env" -f "$COMPOSE_DIR/docker-compose.yml" up -d
+docker compose --env-file "$COMPOSE_DIR/.env" -f "$COMPOSE_DIR/docker-compose.yml" up -d --build
 
 echo "==> Current services"
 docker compose --env-file "$COMPOSE_DIR/.env" -f "$COMPOSE_DIR/docker-compose.yml" ps
-

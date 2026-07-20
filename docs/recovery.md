@@ -5,6 +5,7 @@ Forge should be rebuildable from:
 1. A fresh Ubuntu Server install
 2. This repo
 3. A backup of `/opt/forge`
+4. A backup of `/srv/forge-data/budget`
 
 ## Restore From Backup
 
@@ -21,6 +22,9 @@ Extract a backup:
 sudo tar -xzf /path/to/forge-configs-YYYYMMDD-HHMMSS.tar.gz -C /opt/forge
 sudo chown -R "$USER:$USER" /opt/forge
 ```
+
+Restore Forge Budget data from the latest tested encrypted backup into
+`/srv/forge-data/budget`.
 
 Start services:
 
@@ -58,6 +62,7 @@ docker logs forge-node-red --tail=100
 docker logs forge-uptime-kuma --tail=100
 docker logs forge-mosquitto --tail=100
 docker logs forge-homepage --tail=100
+docker logs forge-budget --tail=100
 ```
 
 Restart one service:
@@ -65,4 +70,3 @@ Restart one service:
 ```bash
 docker restart forge-homeassistant
 ```
-

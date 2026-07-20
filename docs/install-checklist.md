@@ -46,6 +46,7 @@ In the router admin UI:
 
 ```bash
 git clone <repo-url> ~/forge-infra
+git clone https://github.com/travisjslagle/forge-budget.git ~/forge-budget
 cd ~/forge-infra
 cp compose/.env.example compose/.env
 ./scripts/bootstrap.sh
@@ -80,12 +81,14 @@ Open these from your laptop:
 - `http://forge.local:8123`
 - `http://forge.local:1880`
 - `http://forge.local:3001`
+- `http://192.168.50.220:3010`
 
 Create first admin accounts for:
 
 - Home Assistant
 - Node-RED, if prompted/configured
 - Uptime Kuma
+- Forge Budget is LAN-only and should use `http://192.168.50.220:3010`.
 
 ## 8. First Backup
 
@@ -95,4 +98,3 @@ cd ~/forge-infra
 ```
 
 Copy the backup somewhere off Forge once storage plans are settled.
-

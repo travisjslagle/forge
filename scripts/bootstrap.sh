@@ -20,6 +20,7 @@ sudo apt-get install -y \
   git \
   gnupg \
   lsb-release \
+  restic \
   ufw \
   avahi-daemon \
   openssh-server
@@ -35,6 +36,7 @@ sudo usermod -aG docker "$USER"
 
 echo "==> Preparing Forge directories at $FORGE_ROOT"
 sudo mkdir -p \
+  /srv/forge-data/budget \
   "$FORGE_ROOT/backups" \
   "$FORGE_ROOT/homeassistant" \
   "$FORGE_ROOT/homepage" \
@@ -48,6 +50,7 @@ sudo cp "$REPO_ROOT/config/mosquitto/mosquitto.conf" "$FORGE_ROOT/mosquitto/conf
 sudo cp "$REPO_ROOT/config/homepage/settings.yaml" "$FORGE_ROOT/homepage/settings.yaml"
 sudo cp "$REPO_ROOT/config/homepage/services.yaml" "$FORGE_ROOT/homepage/services.yaml"
 sudo chown -R "$USER:$USER" "$FORGE_ROOT"
+sudo chown -R "$USER:$USER" /srv/forge-data/budget
 
 if [[ ! -f "$COMPOSE_DIR/.env" ]]; then
   echo "==> Creating compose/.env from example"
@@ -61,10 +64,10 @@ sudo ufw allow 8123/tcp comment "Home Assistant"
 sudo ufw allow 1880/tcp comment "Node-RED"
 sudo ufw allow 1883/tcp comment "MQTT"
 sudo ufw allow 3001/tcp comment "Uptime Kuma"
+sudo ufw allow from 192.168.50.0/24 to any port 3010 proto tcp comment "Forge Budget LAN"
 sudo ufw --force enable
 
 echo "==> Bootstrap complete"
 echo "Log out and back in before running Docker without sudo, then run:"
 echo "  cd $REPO_ROOT"
 echo "  ./scripts/update-forge.sh"
-

@@ -5,14 +5,14 @@
 - Name: Forge
 - Hostname: `forge`
 - Local DNS/mDNS: `forge.local`
-- Tailscale name: TBD
+- Tailscale name: `forge`
 
 ## LAN
 
-- Reserved IP: TBD
+- Reserved IP: `192.168.50.220`
 - Router admin URL: TBD
 - Ethernet MAC: TBD
-- Wi-Fi: optional/not planned for v1
+- Wi-Fi: active for short-term office placement; move to Ethernet when easy.
 
 ## URLs
 
@@ -22,6 +22,7 @@
 | Home Assistant | `http://forge.local:8123` |
 | Node-RED | `http://forge.local:1880` |
 | Uptime Kuma | `http://forge.local:3001` |
+| Forge Budget | `http://192.168.50.220:3010` |
 | MQTT | `forge.local:1883` |
 
 ## Firewall
@@ -33,11 +34,14 @@ Open on LAN:
 - 1883/tcp MQTT
 - 3000/tcp Homepage
 - 3001/tcp Uptime Kuma
+- 3010/tcp Forge Budget, bound to `192.168.50.220` only
 - 8123/tcp Home Assistant
 
 No router port forwards for v1.
 
-Remote access should go through Tailscale.
+Remote admin access should go through Tailscale for SSH. Forge Budget should
+stay LAN-only and should not be exposed through Tailscale, router port
+forwards, or a public tunnel.
 
 ## Notes
 
@@ -45,4 +49,3 @@ Remote access should go through Tailscale.
   `HOMEPAGE_ALLOWED_HOSTS`.
 - If `.local` names do not resolve from Windows, use the reserved IP or install
   Bonjour/mDNS support.
-

@@ -18,6 +18,11 @@
         href: http://forge.local:1883
         description: Mosquitto broker
         icon: eclipse-mosquitto
+    - Forge Budget:
+        href: http://192.168.50.220:3010
+        description: Local household budget
+        icon: mdi-cash-multiple
+        siteMonitor: http://192.168.50.220:3010/health
 
 - Network:
     - Forge SSH:
@@ -32,4 +37,3 @@
         href: https://login.tailscale.com/admin/machines
         description: Private remote access
         icon: tailscale
-

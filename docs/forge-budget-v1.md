@@ -86,8 +86,9 @@ local-only.
 
 V1 security decisions:
 
-- Keep Forge Budget reachable only on the LAN and Tailscale.
+- Keep Forge Budget reachable only on the LAN.
 - Do not expose Forge Budget to the public internet.
+- Do not expose Forge Budget over Tailscale for v1; keep Tailscale for SSH/admin.
 - Store app data outside git under `/srv/forge-data/budget`.
 - Restrict data directory permissions to the Forge service user.
 - Never commit raw CSVs, SQLite databases, exported statements, or backups.
@@ -111,7 +112,7 @@ V1 backup decisions:
 - Create a timestamped SQLite backup before every import that mutates data.
 - Keep local quick-restore backups under `/srv/forge-data/budget/backups`.
 - Include the SQLite database and archived imports in backup archives.
-- Encrypt backup archives before moving them off Forge.
+- Encrypt backups with restic before moving them off Forge.
 - Copy encrypted backups to at least one other machine, such as the Windows
   desktop or gaming PC.
 - Add optional offsite encrypted backups later.
@@ -122,10 +123,10 @@ Suggested retention:
 - Weekly backups for 8 weeks
 - Monthly backups for 12 months
 
-The eventual backup tool should probably be `restic` because it provides
-encryption, deduplication, pruning, and restore checks. The first version can
-start with a simple script that performs a SQLite backup, creates an archive,
-encrypts it, and prunes old files.
+The v1 encrypted backup tool is `restic` because it provides encryption,
+deduplication, pruning, and restore checks. The first repo slice adds the
+commands and default local repository path, but a full restore test is still
+required before trusting the backup flow.
 
 Restore testing matters. At least monthly, restore a backup into a temporary
 folder and verify that the database opens.
@@ -230,7 +231,7 @@ LLM categorization should be optional and local. The first likely setup is:
 
 - Forge runs Forge Budget.
 - The gaming PC runs Ollama, LM Studio, or a similar local inference server.
-- Forge Budget sends small categorization prompts over the LAN or Tailscale.
+- Forge Budget sends small categorization prompts over the LAN.
 
 Only send the minimum necessary fields:
 

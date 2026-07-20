@@ -12,12 +12,14 @@ runs a small set of local services with Docker Compose.
 - Mosquitto: MQTT event broker
 - Node-RED: visual automation workbench
 - Uptime Kuma: service and network monitoring
+- Forge Budget: LAN-only household budgeting app
 
 ## Target Host
 
 - Hostname: `forge`
 - Local name: `forge.local`
 - Live service data: `/opt/forge`
+- Forge Budget data: `/srv/forge-data/budget`
 - Repo checkout: `/opt/forge/repo` or `~/forge-infra`
 
 ## Quick Start On Forge
@@ -26,6 +28,7 @@ After Ubuntu Server is installed and you can SSH into Forge:
 
 ```bash
 git clone <repo-url> ~/forge-infra
+git clone https://github.com/travisjslagle/forge-budget.git ~/forge-budget
 cd ~/forge-infra
 cp compose/.env.example compose/.env
 ./scripts/bootstrap.sh
@@ -38,6 +41,7 @@ Then open:
 - Home Assistant: `http://forge.local:8123`
 - Node-RED: `http://forge.local:1880`
 - Uptime Kuma: `http://forge.local:3001`
+- Forge Budget: `http://192.168.50.220:3010`
 
 ## Daily Commands
 
@@ -77,3 +81,7 @@ The live service state lives under `/opt/forge`:
 ```
 
 Back up `/opt/forge`, not just this repo.
+
+Forge Budget keeps its financial data outside this repo at
+`/srv/forge-data/budget`. Back it up separately with the app's encrypted backup
+flow.
