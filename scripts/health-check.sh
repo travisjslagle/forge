@@ -43,3 +43,11 @@ ss -tulpn | grep -E ':(1880|1883|3000|3001|3010|8123)\b' || true
 echo
 echo "==> Forge Budget health"
 curl -fsS "http://${FORGE_LAN_IP}:3010/health" || echo "Forge Budget health endpoint is not reachable from this host."
+
+echo
+echo "==> Forge Budget data"
+if [[ -d "${FORGE_BUDGET_DATA:-}" ]]; then
+  ls -ld "$FORGE_BUDGET_DATA"
+else
+  echo "Forge Budget data directory is missing: ${FORGE_BUDGET_DATA:-not configured}"
+fi

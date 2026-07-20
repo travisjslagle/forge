@@ -14,8 +14,8 @@ network posture than the general home automation services.
 The Compose port binding uses `FORGE_LAN_IP:3010:3010`, which keeps the app on
 Forge's reserved LAN address instead of every interface.
 
-If Forge ever moves to a different LAN subnet, update `FORGE_LAN_IP` in
-`compose/.env` and the Forge Budget firewall rule in `scripts/bootstrap.sh`.
+If Forge ever moves to a different LAN subnet, update `FORGE_LAN_IP` and
+`FORGE_LAN_SUBNET` in `compose/.env`.
 
 ## First Deploy
 
@@ -34,7 +34,12 @@ Check `compose/.env`:
 FORGE_BUDGET_SOURCE=/home/forge/forge-budget
 FORGE_BUDGET_DATA=/srv/forge-data/budget
 FORGE_LAN_IP=192.168.50.220
+FORGE_LAN_SUBNET=192.168.50.0/24
 ```
+
+If this is an existing Forge install, `compose/.env` will not update itself when
+the repo changes. Add these values manually from `compose/.env.example` before
+running `./scripts/update-forge.sh`.
 
 Then run:
 
