@@ -4,11 +4,36 @@ set -euo pipefail
 FORGE_ROOT="${FORGE_ROOT:-/opt/forge}"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 COMPOSE_DIR="$REPO_ROOT/compose"
+FORGE_LAN_SUBNET="${FORGE_LAN_SUBNET:-192.168.50.0/24}"
 
 if [[ "${EUID}" -eq 0 ]]; then
   echo "Run this as your normal user with sudo privileges, not as root."
   exit 1
 fi
+
+if [[ ! -f "$COMPOSE_DIR/.env" ]]; then
+  echo "==> Creating compose/.env from example"
+  cp "$COMPOSE_DIR/.env.example" "$COMPOSE_DIR/.env"
+fi
+
+set -a
+# shellcheck disable=SC1091
+source "$COMPOSE_DIR/.env"
+set +a
+
+required_vars=(
+  FORGE_ROOT
+  FORGE_BUDGET_DATA
+  FORGE_LAN_SUBNET
+)
+
+for var_name in "${required_vars[@]}"; do
+  if [[ -z "${!var_name:-}" ]]; then
+    echo "Missing $var_name in $COMPOSE_DIR/.env."
+    echo "Compare it with $COMPOSE_DIR/.env.example and add the new Forge Budget settings."
+    exit 1
+  fi
+done
 
 echo "==> Updating apt packages"
 sudo apt-get update
@@ -20,6 +45,7 @@ sudo apt-get install -y \
   git \
   gnupg \
   lsb-release \
+  restic \
   ufw \
   avahi-daemon \
   openssh-server
@@ -35,6 +61,7 @@ sudo usermod -aG docker "$USER"
 
 echo "==> Preparing Forge directories at $FORGE_ROOT"
 sudo mkdir -p \
+  "$FORGE_BUDGET_DATA" \
   "$FORGE_ROOT/backups" \
   "$FORGE_ROOT/homeassistant" \
   "$FORGE_ROOT/homepage" \
@@ -48,11 +75,7 @@ sudo cp "$REPO_ROOT/config/mosquitto/mosquitto.conf" "$FORGE_ROOT/mosquitto/conf
 sudo cp "$REPO_ROOT/config/homepage/settings.yaml" "$FORGE_ROOT/homepage/settings.yaml"
 sudo cp "$REPO_ROOT/config/homepage/services.yaml" "$FORGE_ROOT/homepage/services.yaml"
 sudo chown -R "$USER:$USER" "$FORGE_ROOT"
-
-if [[ ! -f "$COMPOSE_DIR/.env" ]]; then
-  echo "==> Creating compose/.env from example"
-  cp "$COMPOSE_DIR/.env.example" "$COMPOSE_DIR/.env"
-fi
+sudo chown -R "$USER:$USER" "$FORGE_BUDGET_DATA"
 
 echo "==> Configuring UFW firewall"
 sudo ufw allow OpenSSH
@@ -61,10 +84,10 @@ sudo ufw allow 8123/tcp comment "Home Assistant"
 sudo ufw allow 1880/tcp comment "Node-RED"
 sudo ufw allow 1883/tcp comment "MQTT"
 sudo ufw allow 3001/tcp comment "Uptime Kuma"
+sudo ufw allow from "$FORGE_LAN_SUBNET" to any port 3010 proto tcp comment "Forge Budget LAN"
 sudo ufw --force enable
 
 echo "==> Bootstrap complete"
 echo "Log out and back in before running Docker without sudo, then run:"
 echo "  cd $REPO_ROOT"
 echo "  ./scripts/update-forge.sh"
-
