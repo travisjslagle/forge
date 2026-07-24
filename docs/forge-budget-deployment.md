@@ -35,6 +35,7 @@ FORGE_BUDGET_SOURCE=/home/forge/forge-budget
 FORGE_BUDGET_DATA=/srv/forge-data/budget
 FORGE_LAN_IP=192.168.50.220
 FORGE_LAN_SUBNET=192.168.50.0/24
+FORGE_BUDGET_SESSION_SECRET=<long random string>
 ```
 
 If this is an existing Forge install, `compose/.env` will not update itself when
@@ -48,6 +49,17 @@ Then run:
 ./scripts/update-forge.sh
 ./scripts/health-check.sh
 ```
+
+Seed the two PIN users after the container is running:
+
+```bash
+docker exec forge-budget python scripts/seed-pin-users.py
+```
+
+This creates:
+
+- `Travis` with PIN `3636`
+- `Stefanie` with PIN `2468`
 
 Open `http://192.168.50.220:3010`.
 

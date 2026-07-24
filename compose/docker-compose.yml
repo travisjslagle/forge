@@ -70,6 +70,7 @@ services:
       FORGE_BUDGET_RESTIC_REPOSITORY: /data/restic-repo
       FORGE_BUDGET_RESTIC_PASSWORD_FILE: /data/secrets/restic-password
       FORGE_BUDGET_ENV: forge
+      FORGE_BUDGET_SESSION_SECRET: ${FORGE_BUDGET_SESSION_SECRET}
     volumes:
       - ${FORGE_BUDGET_DATA}:/data
     healthcheck:

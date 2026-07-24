@@ -19,6 +19,7 @@ required_vars=(
   FORGE_BUDGET_SOURCE
   FORGE_BUDGET_DATA
   FORGE_LAN_IP
+  FORGE_BUDGET_SESSION_SECRET
 )
 
 for var_name in "${required_vars[@]}"; do
