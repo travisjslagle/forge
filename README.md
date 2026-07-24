@@ -33,6 +33,7 @@ cd ~/forge-infra
 cp compose/.env.example compose/.env
 ./scripts/bootstrap.sh
 ./scripts/update-forge.sh
+docker exec forge-budget python scripts/seed-pin-users.py
 ```
 
 Then open:
