@@ -22,6 +22,7 @@
 | Home Assistant | `http://forge.local:8123` |
 | Node-RED | `http://forge.local:1880` |
 | Uptime Kuma | `http://forge.local:3001` |
+| Mealie | `http://192.168.50.220:9925` |
 | Forge Budget | `http://192.168.50.220:3010` |
 | MQTT | `forge.local:1883` |
 
@@ -36,6 +37,7 @@ Open on LAN:
 - 3001/tcp Uptime Kuma
 - 3010/tcp Forge Budget, bound to `192.168.50.220` only
 - 8123/tcp Home Assistant
+- 9925/tcp Mealie, bound to `192.168.50.220` only
 
 No router port forwards for v1.
 

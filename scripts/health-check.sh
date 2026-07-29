@@ -38,7 +38,11 @@ fi
 
 echo
 echo "==> Listening ports"
-ss -tulpn | grep -E ':(1880|1883|3000|3001|3010|8123)\b' || true
+ss -tulpn | grep -E ':(1880|1883|3000|3001|3010|8123|9925)\b' || true
+
+echo
+echo "==> Mealie"
+curl -fsS -o /dev/null "http://${FORGE_LAN_IP}:9925" && echo "Mealie is reachable." || echo "Mealie is not reachable from this host."
 
 echo
 echo "==> Forge Budget health"

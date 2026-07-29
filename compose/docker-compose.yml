@@ -55,6 +55,22 @@ services:
     volumes:
       - ${FORGE_ROOT}/uptime-kuma:/app/data
 
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v3.21.0
+    container_name: forge-mealie
+    restart: unless-stopped
+    ports:
+      - "${FORGE_LAN_IP}:9925:9000"
+    environment:
+      TZ: ${TZ}
+      PUID: ${PUID}
+      PGID: ${PGID}
+      BASE_URL: http://${FORGE_LAN_IP}:9925
+      ALLOW_SIGNUP: "false"
+      DB_ENGINE: sqlite
+    volumes:
+      - ${FORGE_ROOT}/mealie:/app/data
+
   forge-budget:
     build: ${FORGE_BUDGET_SOURCE}
     container_name: forge-budget
