@@ -63,6 +63,7 @@ docker logs forge-uptime-kuma --tail=100
 docker logs forge-mosquitto --tail=100
 docker logs forge-homepage --tail=100
 docker logs forge-budget --tail=100
+docker logs forge-mealie --tail=100
 ```
 
 Restart one service:
@@ -70,3 +71,8 @@ Restart one service:
 ```bash
 docker restart forge-homeassistant
 ```
+
+Mealie trial data lives under `/opt/forge/mealie` and is included in
+`scripts/backup-configs.sh`. Mealie also has its own UI backup/export flow;
+use that before version upgrades. Preserve `/opt/forge/mealie` during rollback
+unless the trial data is intentionally being discarded.

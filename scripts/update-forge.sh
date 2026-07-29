@@ -20,6 +20,8 @@ required_vars=(
   FORGE_BUDGET_DATA
   FORGE_LAN_IP
   FORGE_BUDGET_SESSION_SECRET
+  PUID
+  PGID
 )
 
 for var_name in "${required_vars[@]}"; do
@@ -39,12 +41,13 @@ fi
 echo "==> Syncing service config"
 sudo mkdir -p \
   "$FORGE_ROOT/homepage" \
+  "$FORGE_ROOT/mealie" \
   "$FORGE_ROOT/mosquitto/config" \
   "$FORGE_BUDGET_DATA"
 sudo cp "$REPO_ROOT/config/homepage/settings.yaml" "$FORGE_ROOT/homepage/settings.yaml"
 sudo cp "$REPO_ROOT/config/homepage/services.yaml" "$FORGE_ROOT/homepage/services.yaml"
 sudo cp "$REPO_ROOT/config/mosquitto/mosquitto.conf" "$FORGE_ROOT/mosquitto/config/mosquitto.conf"
-sudo chown -R "$USER:$USER" "$FORGE_ROOT/homepage" "$FORGE_ROOT/mosquitto" "$FORGE_BUDGET_DATA"
+sudo chown -R "$USER:$USER" "$FORGE_ROOT/homepage" "$FORGE_ROOT/mealie" "$FORGE_ROOT/mosquitto" "$FORGE_BUDGET_DATA"
 
 echo "==> Pulling container images"
 docker compose --env-file "$COMPOSE_DIR/.env" -f "$COMPOSE_DIR/docker-compose.yml" pull --ignore-buildable

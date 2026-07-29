@@ -21,6 +21,7 @@ fi
   -C "$FORGE_ROOT" \
   homeassistant \
   homepage \
+  mealie \
   mosquitto \
   node-red \
   uptime-kuma

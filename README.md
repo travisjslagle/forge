@@ -12,6 +12,7 @@ runs a small set of local services with Docker Compose.
 - Mosquitto: MQTT event broker
 - Node-RED: visual automation workbench
 - Uptime Kuma: service and network monitoring
+- Mealie: local recipe and meal-planning trial
 - Forge Budget: LAN-only household budgeting app
 
 ## Target Host
@@ -42,6 +43,7 @@ Then open:
 - Home Assistant: `http://forge.local:8123`
 - Node-RED: `http://forge.local:1880`
 - Uptime Kuma: `http://forge.local:3001`
+- Mealie: `http://192.168.50.220:9925`
 - Forge Budget: `http://192.168.50.220:3010`
 
 ## Daily Commands
@@ -76,6 +78,7 @@ The live service state lives under `/opt/forge`:
   backups/
   homeassistant/
   homepage/
+  mealie/
   mosquitto/
   node-red/
   uptime-kuma/

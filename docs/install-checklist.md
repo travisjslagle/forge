@@ -81,6 +81,7 @@ Open these from your laptop:
 - `http://forge.local:8123`
 - `http://forge.local:1880`
 - `http://forge.local:3001`
+- `http://192.168.50.220:9925`
 - `http://192.168.50.220:3010`
 
 Create first admin accounts for:
@@ -88,6 +89,7 @@ Create first admin accounts for:
 - Home Assistant
 - Node-RED, if prompted/configured
 - Uptime Kuma
+- Mealie: sign in with the documented default credentials, then immediately change the admin email/password. Keep signup disabled.
 - Forge Budget is LAN-only and should use `http://192.168.50.220:3010`.
 
 ## 8. First Backup

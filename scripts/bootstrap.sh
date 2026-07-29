@@ -65,6 +65,7 @@ sudo mkdir -p \
   "$FORGE_ROOT/backups" \
   "$FORGE_ROOT/homeassistant" \
   "$FORGE_ROOT/homepage" \
+  "$FORGE_ROOT/mealie" \
   "$FORGE_ROOT/mosquitto/config" \
   "$FORGE_ROOT/mosquitto/data" \
   "$FORGE_ROOT/mosquitto/log" \
@@ -84,6 +85,7 @@ sudo ufw allow 8123/tcp comment "Home Assistant"
 sudo ufw allow 1880/tcp comment "Node-RED"
 sudo ufw allow 1883/tcp comment "MQTT"
 sudo ufw allow 3001/tcp comment "Uptime Kuma"
+sudo ufw allow from "$FORGE_LAN_SUBNET" to any port 9925 proto tcp comment "Mealie LAN"
 sudo ufw allow from "$FORGE_LAN_SUBNET" to any port 3010 proto tcp comment "Forge Budget LAN"
 sudo ufw --force enable
 

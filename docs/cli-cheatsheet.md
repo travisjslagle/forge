@@ -30,6 +30,7 @@ http://forge:3000              Homepage
 http://forge:8123              Home Assistant
 http://forge:1880              Node-RED
 http://forge:3001              Uptime Kuma
+http://192.168.50.220:9925     Mealie
 
 http://192.168.50.220:3000     Homepage by LAN IP
 ```
@@ -83,6 +84,7 @@ docker restart forge-homeassistant
 docker restart forge-node-red
 docker restart forge-uptime-kuma
 docker restart forge-mosquitto
+docker restart forge-mealie
 ```
 
 Force-recreate Homepage after editing `compose/.env`:
@@ -116,6 +118,7 @@ docker logs forge-homeassistant --tail=100
 docker logs forge-node-red --tail=100
 docker logs forge-uptime-kuma --tail=100
 docker logs forge-mosquitto --tail=100
+docker logs forge-mealie --tail=100
 ```
 
 Follow live logs:
@@ -215,6 +218,19 @@ Verify the container received it:
 docker exec forge-homepage printenv HOMEPAGE_ALLOWED_HOSTS
 ```
 
+## Mealie Trial
+
+Mealie is pinned in Compose. Before bumping the image tag, read the Mealie
+release notes and create a Mealie UI backup plus the normal Forge config
+backup.
+
+Useful checks:
+
+```bash
+docker logs forge-mealie --tail=100
+curl -fsS http://192.168.50.220:9925 >/dev/null && echo "Mealie reachable"
+```
+
 ## Uptime Kuma Monitor Targets
 
 Use LAN IPs inside Uptime Kuma because it runs in Docker and may not resolve
@@ -225,6 +241,7 @@ HTTP(s)  Homepage         http://192.168.50.220:3000
 HTTP(s)  Home Assistant   http://192.168.50.220:8123
 HTTP(s)  Node-RED         http://192.168.50.220:1880
 HTTP(s)  Uptime Kuma      http://192.168.50.220:3001
+HTTP(s)  Mealie           http://192.168.50.220:9925
 Port     MQTT             192.168.50.220 / 1883
 Ping     Router           192.168.50.1
 Ping     Internet         1.1.1.1
@@ -279,4 +296,3 @@ needed:
 ```bash
 sudo iwconfig wlp2s0 power off
 ```
-
